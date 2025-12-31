@@ -1,135 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy New Year 2026 ❤️</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy New Year 2026 ❤️</title>
 
-  <style>
-    body{
-      margin:0;
-      font-family:'Segoe UI',sans-serif;
-      background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);
-      color:#fff;
-      overflow-x:hidden;
-    }
+<style>
+body{
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);
+  color:#fff;
+  overflow-x:hidden;
+}
 
-    header{
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      text-align:center;
-      padding:20px;
-    }
+header{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
 
-    header h1{font-size:3rem;}
-    header h2{color:#ffb6d5;font-weight:400;}
+h1{font-size:3rem}
+h2{color:#ffb6d5}
 
-    .heart{font-size:3rem;animation:pulse 1.5s infinite;margin:20px 0;}
-    @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.2)}100%{transform:scale(1)}}
+.heart{font-size:3rem;animation:pulse 1.5s infinite}
+@keyframes pulse{50%{transform:scale(1.2)}}
 
-    .btn{
-      padding:14px 26px;
-      border:none;
-      border-radius:30px;
-      background:#ff5f9e;
-      color:#fff;
-      font-size:1.1rem;
-      cursor:pointer;
-      margin-top:20px;
-    }
+.btn{
+  padding:14px 26px;
+  border:none;
+  border-radius:30px;
+  background:#ff5f9e;
+  color:#fff;
+  font-size:1.1rem;
+  cursor:pointer;
+  margin:10px;
+}
 
-    .section{
-      padding:70px 20px;
-      max-width:1000px;
-      margin:auto;
-      text-align:center;
-    }
+.section{
+  padding:70px 20px;
+  max-width:1000px;
+  margin:auto;
+  text-align:center;
+}
 
-    .section h3{font-size:2.2rem;color:#ff8acb;margin-bottom:20px;}
+.message{
+  background:rgba(255,255,255,.08);
+  padding:30px;
+  border-radius:20px;
+  font-size:1.2rem;
+}
 
-    .message{
-      background:rgba(255,255,255,0.08);
-      padding:30px;
-      border-radius:20px;
-      line-height:1.8;
-      font-size:1.2rem;
-    }
+.secret-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:20px;
+}
 
-    .secret-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
-      gap:20px;
-    }
+.frame{
+  height:240px;
+  border-radius:18px;
+  overflow:hidden;
+  position:relative;
+}
 
-    .frame{
-      height:240px;
-      border-radius:18px;
-      background:#111;
-      position:relative;
-      overflow:hidden;
-      cursor:pointer;
-    }
+.frame::after{
+  content:"Hover to reveal ❤️";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:.5s;
+}
 
-    .frame::after{
-      content:"Hover to reveal ❤️";
-      position:absolute;
-      inset:0;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:rgba(0,0,0,0.85);
-      color:#fff;
-      transition:opacity .5s;
-    }
+.frame:hover::after{opacity:0}
+.frame img{width:100%;height:100%;object-fit:cover}
 
-    .frame:hover::after{opacity:0}
+.letter{
+  display:none;
+  background:#5b4636;
+  color:#f5e6c8;
+  padding:40px;
+  border-radius:10px;
+  font-family:Georgia,serif;
+}
 
-    .frame img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-    }
-
-    .letter{
-      background:#5b4636;
-      color:#f5e6c8;
-      padding:50px 30px;
-      border-radius:10px;
-      font-family:'Georgia',serif;
-      box-shadow:0 0 40px rgba(0,0,0,.5);
-      max-width:800px;
-      margin:auto;
-      line-height:1.9;
-      font-size:1.2rem;
-      display:none; /* 🔒 hidden until midnight */
-    }
-
-    canvas{
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-    }
-
-    footer{padding:30px;text-align:center;color:#ccc}
-  </style>
+canvas{position:fixed;inset:0;pointer-events:none}
+footer{text-align:center;padding:20px;color:#ccc}
+</style>
 </head>
 
 <body>
 
-<!-- PASSWORD SCREEN -->
-<div id="lock" style="position:fixed;inset:0;background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);display:flex;align-items:center;justify-content:center;z-index:9999;">
-  <div style="background:rgba(255,255,255,0.1);padding:40px;border-radius:20px;text-align:center;max-width:350px;width:90%">
-    <h2 style="color:#ff8acb">🔐 Private Page</h2>
-    <p>Only for the one who owns my heart ❤️</p>
-    <input id="pass" type="password" placeholder="Enter the secret"
-      style="padding:12px;width:100%;border:none;border-radius:10px;margin-bottom:15px;">
-    <button onclick="unlock()" style="padding:12px 20px;border:none;border-radius:20px;background:#ff5f9e;color:white;cursor:pointer">
-      Enter 💖
-    </button>
-    <p id="error" style="color:#ffaaaa;margin-top:10px"></p>
+<!-- LOCK SCREEN -->
+<div id="lock" style="position:fixed;inset:0;background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);display:flex;align-items:center;justify-content:center;z-index:9999">
+  <div style="background:rgba(255,255,255,.1);padding:40px;border-radius:20px;text-align:center">
+    <h2>🔐 Private Page</h2>
+    <input id="pass" type="password" placeholder="Enter secret" style="padding:12px;width:100%;border-radius:10px;border:none">
+    <br><br>
+    <button class="btn" onclick="unlock()">Enter 💖</button>
+    <p id="error" style="color:#ffaaaa"></p>
   </div>
 </div>
 
@@ -142,23 +117,18 @@
 </header>
 
 <section class="section">
-  <h3>⏳ Countdown to 2026</h3>
+  <h3>⏳ Countdown</h3>
   <div id="countdown" class="message"></div>
 </section>
 
 <section id="message" class="section">
-  <h3>My New Year Wish</h3>
-  <div class="message">
-    The best thing I already have is YOU ❤️
-  </div>
+  <h3>My Wish</h3>
+  <div class="message">The best thing I already have is YOU ❤️</div>
 </section>
 
 <section class="section">
-  <h3>💌 A Love Letter</h3>
-  <div id="letterLock" class="message">
-    🔒 This letter will unlock at midnight ❤️
-  </div>
-
+  <h3>💌 Love Letter</h3>
+  <div id="letterLock" class="message">🔒 Unlocks at midnight</div>
   <div id="letterContent" class="letter">
     My Love,<br><br>
     Forever yours ❤️<br>
@@ -169,279 +139,63 @@
 <canvas id="fireworks"></canvas>
 <audio id="music" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
 
-<footer>Made with ❤️ just for you</footer>
+<footer>Made with ❤️</footer>
 
 <script>
 function scrollToSection(id){
   document.getElementById(id).scrollIntoView({behavior:'smooth'});
 }
 
-/* PASSWORD (case-insensitive) */
 function unlock(){
-  const correct = "MERA BACHA";
-  const input = document.getElementById("pass").value.trim().toLowerCase();
-  if(input === correct.toLowerCase()){
-    document.getElementById("lock").style.display = "none";
+  if(document.getElementById('pass').value.trim().toLowerCase()==='mera bacha'){
+    document.getElementById('lock').style.display='none';
   } else {
-    document.getElementById("error").innerText = "Wrong password 💔";
+    document.getElementById('error').innerText='Wrong password 💔';
   }
 }
 
-/* COUNTDOWN + LETTER UNLOCK */
-const targetDate = new Date("January 1, 2026 00:00:00").getTime();
-
-setInterval(() => {
-  const now = new Date().getTime();
-  const diff = targetDate - now;
-
-  if(diff <= 0){
-    document.getElementById("countdown").innerHTML = "🎉 Happy New Year 2026 ❤️";
-    document.getElementById("letterLock").style.display = "none";
-    document.getElementById("letterContent").style.display = "block";
+/* Countdown */
+const target=new Date("January 1, 2026 00:00:00").getTime();
+setInterval(()=>{
+  const now=new Date().getTime();
+  const diff=target-now;
+  if(diff<=0){
+    countdown.innerHTML="🎉 Happy New Year 2026 ❤️";
+    letterLock.style.display="none";
+    letterContent.style.display="block";
     return;
   }
+  countdown.innerHTML=Math.floor(diff/86400000)+" days "
+    +Math.floor(diff/3600000%24)+" hrs "
+    +Math.floor(diff/60000%60)+" min "
+    +Math.floor(diff/1000%60)+" sec";
+},1000);
 
-  const d = Math.floor(diff / (1000*60*60*24));
-  const h = Math.floor((diff / (1000*60*60)) % 24);
-  const m = Math.floor((diff / (1000*60)) % 60);
-  const s = Math.floor((diff / 1000) % 60);
-
-  document.getElementById("countdown").innerHTML =
-    `${d} days ${h} hrs ${m} min ${s} sec`;
-}, 1000);
-
-/* SURPRISE */
-function startSurprise(){
-  document.getElementById("music").play();
-  alert("🎆      background:#ff5f9e;
-      color:#fff;
-      font-size:1.1rem;
-      cursor:pointer;
-      margin-top:20px;
-    }
-
-    .section{
-      padding:70px 20px;
-      max-width:1000px;
-      margin:auto;
-      text-align:center;
-    }
-
-    .section h3{font-size:2.2rem;color:#ff8acb;margin-bottom:20px;}
-
-    .message{
-      background:rgba(255,255,255,0.08);
-      padding:30px;
-      border-radius:20px;
-      line-height:1.8;
-      font-size:1.2rem;
-    }
-
-    /* ===== Secret Gallery ===== */
-    .secret-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
-      gap:20px;
-    }
-
-    .frame{
-      height:240px;
-      border-radius:18px;
-      background:#111;
-      position:relative;
-      overflow:hidden;
-      cursor:pointer;
-    }
-
-    .frame::after{
-      content:"Hover to reveal ❤️";
-      position:absolute;
-      inset:0;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:rgba(0,0,0,0.85);
-      color:#fff;
-      font-size:1rem;
-      transition:opacity .5s;
-    }
-
-    .frame:hover::after{opacity:0}
-
-    .frame img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-    }
-
-    /* ===== Love Letter ===== */
-    .letter{
-      background:#5b4636;
-      color:#f5e6c8;
-      padding:50px 30px;
-      border-radius:10px;
-      font-family:'Georgia',serif;
-      box-shadow:0 0 40px rgba(0,0,0,.5);
-      max-width:800px;
-      margin:auto;
-      line-height:1.9;
-      font-size:1.2rem;
-    }
-
-    /* ===== Fireworks ===== */
-    canvas{
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-    }
-
-    footer{padding:30px;text-align:center;color:#ccc}
-  </style>
-</head>
-<body>
-
-<!-- Password Screen -->
-<div id="lock" style="position:fixed;inset:0;background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);display:flex;align-items:center;justify-content:center;z-index:9999;">
-  <div style="background:rgba(255,255,255,0.1);padding:40px;border-radius:20px;text-align:center;max-width:350px;width:90%">
-    <h2 style="color:#ff8acb">🔐 Private Page</h2>
-    <p style="margin:15px 0">Only for the one who owns my heart ❤️</p>
-    <p style="margin:15px 0">The Most I call her ❤️</p>
-    <input id="pass" type="password" placeholder="Enter the secret" style="padding:12px;width:100%;border:none;border-radius:10px;margin-bottom:15px;font-size:1rem">
-    <button onclick="unlock()" style="padding:12px 20px;border:none;border-radius:20px;background:#ff5f9e;color:white;font-size:1rem;cursor:pointer">Enter 💖</button>
-    <p id="error" style="color:#ffaaaa;margin-top:10px"></p>
-  </div>
-</div>
-
-
-<header>
-  <h1>🎆 Happy New Year 2026 🎆</h1>
-  <h2>To the one who owns my heart</h2>
-  <div class="heart">❤️</div>
-  <button class="btn" onclick="scrollToSection('message')">My Message 💌</button>
-  <button class="btn" onclick="startSurprise()">Surprise 🎁</button>
-</header>
-
-<section class="section">
-  <h3>⏳ Countdown to 2026</h3>
-  <div id="countdown" class="message" style="font-size:1.5rem"></div>
-</section>
-
-<section id="message" class="section">
-  <h3>My New Year Wish</h3>
-  <div class="message">
-    A new year means new hopes, new dreams and new memories.
-    But the best thing I already have is YOU.
-    Thank you for being part of my life and making it beautiful ❤️
-  </div>
-</section>
-
-<section class="section">
-  <h3>🔐 Secret Memories</h3>
-  <p>(Hover to reveal our secret moments)</p>
-  <div class="secret-grid">
-    <div class="frame"><img src="1.jpeg"></div>
-    <div class="frame"><img src="2.jpeg"></div>
-    <div class="frame"><img src="3.jpeg"></div>
-    <div class="frame"><img src="4.jpeg"></div>
-    <div class="frame"><img src="5.jpeg"></div>
-    <div class="frame"><img src="6.jpeg"></div>
-    <div class="frame"><img src="7.jpeg"></div>
-    <div class="frame"><img src="8.jpeg"></div>
-    <div class="frame"><img src="9.jpeg"></div>
-    <div class="frame"><img src="10.jpeg"></div>
-  </div>
-</section>
-
-<section class="section">
-  <h3>💌 A Love Letter</h3>
-  <div id="letterLock" class="message">
-    🔒 This letter will unlock at midnight (12:00 AM, Jan 1 2026)<br><br>
-    Please come back when the New Year begins ❤️
-  </div>
-
-  <div id="letterContent" class="letter">
-    My Love,<br><br>
-    If words could truly capture what I feel for you, this page would never end.
-    You walked into my life quietly, but changed everything forever.
-    Every smile of yours feels like home, and every moment with you is a memory I want to keep safe forever.
-    <br><br>
-    As this new year begins, I want you to know — you are my favorite part of every day.
-    <br><br>
-    Forever yours ❤️
-    A veryyyy veryyyy Happy New Year meriii jaan meriii kanak, I Love You soooooo muchhhhhhhhhhh this year has been like a roller coaster for my life and u were there at my all point with me jab meri life ka roller coaster top par ho tab bhi aur bottom par ho tab bhi , sooo agar tum mujhse puchoge ki mere liye yeh saal kaisa tha it was worst really it was worst yeh saaal ne mere do saal le liyee 🥺 i don't know what to say but mujhe jab yaad ata hai vo sab kuch mein andar hi andar tut jata hui 🥺 mein kitna bhi chahu I can't move on from that , it was really a heartbeat for me aur I don't but sabse achi cheez usme yeh thi u were there with me my family was there with me . Tumne kabhi Mera sath nahi choda u were always with me , mein apni photos dekhta hui dusro ko dikhata hui toh people are like bhai usne tujhe kaise nahi choda I was looking worst , pta nahi tumko kaise pasand tha shayad shi mein pyar ne tumko andha kar diya hai 😭 , anyways if u ask ki relationship ke liye yeh saal aksia tha it was superb ab tum puchogi superb kaise ham itna ladeee , kanak ji hamne har test ko ek sath milkar paaar kiya hain , tumne iss saal mujhe mere lowest par dekha hai tumne mujhe sambhala haj tumne pyar kuya hai fir jo do saal se ham time spend nahi kar paa rahe the hamne go kiya hainn , do saal se mein jaisa 11 aur 12 mein tha waisa nahi rha hui tumne vo 10 wala Arnav notice Kiya hai , ham ghume hai ham mile hai hamne ek sath bahot acha waqt spend Kara hai hamne long distance mein rahana shuru Kara hai , what u need love purest form hain if we survive long distance relationship. Aur kar rahe hai ladte hai lekin not because of any communication gap aur something ham ladge hai bachpane mein immaturity mein lekin ek dusre ko samajhte hain , we have spent a beautiful time aur aage bhi spend karna hai shayd next saal aur tough ho aur mushkile aaye yaa aur jayada pyara ho no matter vo kaisa bhi ho hame hamesha sath rahan ahia ek dusre ke liye ek dusre ke sath ONCE AGAIN AA VERYYYYYY HAPPY NEW YEAR 2026 god may bless u iss saal tum badiya sa result la kar mujhe khuskhabri sunaooo I LOVE YOU MERAAA BACHAAAAA I LOVE YOU MORE
-  </div>
-</section>
-
-<canvas id="fireworks"></canvas>
-<audio id="music" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
-
-<footer>Made with ❤️ just for you — New Year 2026</footer>
-
-<script>
-function scrollToSection(id){document.getElementById(id).scrollIntoView({behavior:'smooth'})}
-
-const canvas=document.getElementById('fireworks');
-const ctx=canvas.getContext('2d');
-canvas.width=innerWidth;canvas.height=innerHeight;
-let particles=[];
-
+/* Fireworks */
+const c=document.getElementById("fireworks"),x=c.getContext("2d");
+c.width=innerWidth;c.height=innerHeight;
+let p=[];
 function firework(){
-  for(let i=0;i<80;i++){
-    particles.push({
-      x:Math.random()*canvas.width,
-      y:Math.random()*canvas.height/2,
-      vx:(Math.random()-0.5)*6,
-      vy:(Math.random()-0.5)*6,
-      life:100
-    })
-  }
+  for(let i=0;i<60;i++)
+    p.push({x:Math.random()*c.width,y:Math.random()*c.height/2,
+    vx:(Math.random-.5)*6,vy:(Math.random-.5)*6,l:80});
 }
-
-function animate(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  particles.forEach((p,i)=>{
-    p.x+=p.vx;p.y+=p.vy;p.life--;
-    ctx.fillStyle='rgba(255,200,200,.8)';
-    ctx.fillRect(p.x,p.y,3,3);
-    if(p.life<=0)particles.splice(i,1)
-  })
-  requestAnimationFrame(animate)
-}
-animate();
-
-const targetDate = new Date('January 1, 2026 00:00:00').getTime();
-setInterval(() => {
-  const now = new Date().getTime();
-  const diff = targetDate - now;
-  if (diff <= 0) {
-    document.getElementById('countdown').innerHTML = '🎉 Happy New Year 2026 My Love ❤️';
-    return;
-  }
-  const d = Math.floor(diff / (1000*60*60*24));
-  const h = Math.floor((diff / (1000*60*60)) % 24);
-  const m = Math.floor((diff / (1000*60)) % 60);
-  const s = Math.floor((diff / 1000) % 60);
-  document.getElementById('countdown').innerHTML = `${d} days ${h} hrs ${m} min ${s} sec`;
-}, 1000);
+(function anim(){
+  x.clearRect(0,0,c.width,c.height);
+  p.forEach((a,i)=>{
+    a.x+=a.vx;a.y+=a.vy;a.l--;
+    x.fillRect(a.x,a.y,3,3);
+    if(a.l<=0)p.splice(i,1);
+  });
+  requestAnimationFrame(anim);
+})();
 
 function startSurprise(){
-  document.getElementById('music').play();
+  music.play();
   setInterval(firework,700);
-  alert('🎆 Surprise! Happy New Year My Love ❤️');
+  alert("🎆 Happy New Year My Love ❤️");
 }
-function unlock(){
-  const correct = 'MERA BACHA';
-  const input = document.getElementById('pass').value;
-  if(input === correct){
-    document.getElementById('lock').style.display = 'none';
-  } else {
-    document.getElementById('error').innerText = 'Wrong password 💔';
-  }
-}
-
 </script>
 
 </body>
 </html>
-
-
